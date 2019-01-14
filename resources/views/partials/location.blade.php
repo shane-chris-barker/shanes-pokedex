@@ -1,6 +1,9 @@
 <div class="card mb-10">
     <div class="card-header">
         <h3 class="text-center">Pokedex information for <strong>{{ucfirst(str_replace('-', ' ', ($data->name)))}}</strong></h3>
+        @if($cachedResult !== false)
+            <p class="text-center">(This result is cached from a previous seach)</p>
+        @endif
     </div>
     <div class="card-body">
         <div class="row">
