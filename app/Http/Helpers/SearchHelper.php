@@ -5,10 +5,10 @@ namespace App\Http\Helpers;
 class SearchHelper
 {
     const SEARCH_TYPES = [
-        'name'      => 'pokemon/',
-        'move'      => 'move/',
-        'item'      => 'item/',
-        'location'  => 'location/'
+        'name'      => 'pokemon',
+        'move'      => 'move',
+        'item'      => 'item',
+        'location'  => 'location'
     ];
     // function sets the API endpoint to call based on the searchType
     public function setUrl($searchType)
