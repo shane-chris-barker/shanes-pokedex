@@ -2,7 +2,7 @@
 @section('content')
     <div class="container-fluid" id="intro">
         <div class="row">
-            <div class="col-2 offset-5">
+            <div class="col-md-2 offset-md-5 col-8 offset-2">
                 <img src="{{asset('img/logo.png')}}" class="img-fluid"/>
             </div>
         </div>
@@ -16,7 +16,7 @@
             <br>
             Consumes the API kindly created and provided by <a href="https://pokeapi.co/" target="_blank">PokeApi</a>
         </p>
-        <div class="col-4 offset-4">
+        <div class="col-md-4 offset-md-4 col-12">
             @if($errors->any())
                 <div class="alert alert-danger">
                     {{$errors->first()}}
@@ -26,7 +26,7 @@
         </div>
         @if ($hasResults === true)
             <div class="p-10">
-                <div class="col-4 offset-4 mt-5 mt-10" id="results">
+                <div class="col-md-4 offset-md-4 col-12 mt-5 mt-10" id="results">
                     {!! $results !!}
                 </div>
             </div>

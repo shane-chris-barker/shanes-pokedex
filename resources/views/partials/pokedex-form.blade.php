@@ -1,5 +1,5 @@
 {{Form::open(['route' => 'pokedex.search'])}}
-<div class="row form-group col-10 offset-1">
+<div class="col-md-10 offset-md-1 col-12">
     <div class="form-check form-check-inline">
         {{Form::radio('search','name', 'checked', ['class' => 'form-check-input'])}}
         {{Form::label('name', 'Search for a Pokemon by name or ID',['class' => 'form-check-label'] )}}
@@ -17,10 +17,10 @@
 <div class="row form-group">
     {{Form::label("search_param", "Enter your search term:",
         [
-            'class' => 'col-10 offset-1 form-label'
+            'class' => 'col-md-10 offset-md-1 col-12 text-center form-label'
         ]
     )}}
-    <div class="col-10 offset-1">
+    <div class="col-md-10 offset-md-1 col-12">
         {{Form::text('search_param', null,
             [
                 'class' => 'form-control',
