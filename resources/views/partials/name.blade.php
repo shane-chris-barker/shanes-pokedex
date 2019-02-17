@@ -2,7 +2,7 @@
     <div class="card-header">
         <h3 class="text-center">Pokedex information for <strong>{{ucfirst($data->name)}}</strong></h3>
         @if($cachedResult !== false)
-            <p class="text-center">(This result is cached from a previous seach)</p>
+            <p class="text-center">(This result is cached from a previous search)</p>
         @endif
     </div>
     <div class="row">
