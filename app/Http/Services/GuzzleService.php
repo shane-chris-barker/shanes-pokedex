@@ -6,16 +6,31 @@ use GuzzleHttp\Exception\ClientException;
 class GuzzleService
 {
     private $guzzleClient;
+
+    /**
+     * GuzzleService constructor.
+     * @param $baseUrl
+     */
     public function __construct($baseUrl)
     {
         $this->guzzleClient = new Client(['base_uri' => $baseUrl]);
-
     }
 
-    //Perform a GET request against the pokeApi and catch any exceptions
-    public function callPokeApi($endpoint, $searchParam, $searchValue)
+    /**
+     * @param $endpoint
+     * @param null $searchValue
+     * @param bool $fullUrl
+     * @return bool|mixed
+     *
+     * Use the Guzzle client to query the PokeApi
+     */
+    public function callPokeApi($endpoint, $searchValue = null, $fullUrl = false)
     {
-        $queryString = "{$endpoint}/$searchValue";
+        if (false === $fullUrl) {
+            $queryString = "{$endpoint}/$searchValue";
+        } else {
+            $queryString = $endpoint;
+        }
         try {
             $response = $this->guzzleClient->get($queryString);
         } catch (ClientException $e) {
