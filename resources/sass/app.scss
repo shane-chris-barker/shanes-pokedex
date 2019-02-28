@@ -5,6 +5,12 @@
 // Variables
 @import 'variables';
 
+// pokemon type colors
+@import 'types';
+
+// switchery
+@import 'switcher';
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
@@ -17,7 +23,7 @@ footer {
     background-color:#00A9ED;
 }
 #content {
-    min-height:12em;
+    min-height:40em;
 }
 #intro {
     background-color:#00A9ED;
@@ -27,81 +33,6 @@ footer {
 #dex-outer {
     background-color:red;
     min-height:4em;
-}
-
-.grass-type {
-    color:white;
-    background-color:#9bcc50;
-}
-.fire-type {
-    color:white;
-    background-color:orange;
-}
-
-.water-type {
-    color:white;
-    background-color:#4592c4;
-}
-
-.electric-type {
-    color:black;
-    background-color:yellow;
-}
-
-.psychic-type {
-    color:white;
-    background-color: #f366b9;
-}
-
-.poison-type {
-    color:white;
-    background-color:#b97fc9;
-}
-
-.bug-type {
-    color:white;
-    background-color:#729f3f;
-}
-
-.normal-type {
-    color:white;
-    background-color:#a4acaf;
-}
-
-.fairy-type {
-    color:white;
-    background-color:#fdb9e9
-}
-
-.fighting-type {
-    color:white;
-    background-color:#d56723;
-}
-
-.rock-type {
-    color:white;
-    background-color:#a38c21;
-}
-
-.steel-type {
-    color:white;
-    background-color:#9eb7b8;
-}
-
-.ice-type {
-    color:white;
-    background-color:#51c4e7;
-}
-
-.ghost-type {
-    color:white;
-    background-color:#7b62a3;
-}
-
-.flying-type {
-    background: linear-gradient(180deg, #3dc7ef 50%, #bdb9b8 50%);
-    background-color: #3dc7ef;
-    color:white;
 }
 
 #dex {

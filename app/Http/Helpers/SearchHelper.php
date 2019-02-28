@@ -1,16 +1,22 @@
 <?php
 namespace App\Http\Helpers;
 
-
 class SearchHelper
 {
     const SEARCH_TYPES = [
         'name'      => 'pokemon',
         'move'      => 'move',
         'item'      => 'item',
-        'location'  => 'location'
+        'location'  => 'location',
+        'species'   => 'species',
     ];
-    // function sets the API endpoint to call based on the searchType
+
+    /**
+     * @param $searchType
+     * @return bool|mixed
+     *
+     * Set the endpoint to call based on the type of search being requested
+     */
     public function setUrl($searchType)
     {
         if (array_key_exists($searchType, self::SEARCH_TYPES)) {
@@ -18,6 +24,5 @@ class SearchHelper
         }
 
         return false;
-
     }
 }
