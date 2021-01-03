@@ -5,15 +5,18 @@ use GuzzleHttp\Exception\ClientException;
 
 class GuzzleService
 {
+    /** @var array */
+    const CLIENT_DEFAULTS = ['base_uri' => "https://pokeapi.co/api/v2/"];
+
+    /** @var Client $guzzleClient */
     private $guzzleClient;
 
     /**
      * GuzzleService constructor.
-     * @param $baseUrl
      */
-    public function __construct($baseUrl)
+    public function __construct()
     {
-        $this->guzzleClient = new Client(['base_uri' => $baseUrl]);
+        $this->guzzleClient = new Client(self::CLIENT_DEFAULTS);
     }
 
     /**
@@ -31,6 +34,7 @@ class GuzzleService
         } else {
             $queryString = $endpoint;
         }
+
         try {
             $response = $this->guzzleClient->get($queryString);
         } catch (ClientException $e) {

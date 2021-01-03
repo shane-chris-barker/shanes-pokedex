@@ -12,6 +12,10 @@
         {{Form::radio('search', 'item', null, ['class' => 'form-check-input'])}}
         {{Form::label('item', 'Search for an item by name or ID', ['class' => 'form-check-label'])}}
     </div>
+    <div class="form-check form-check-inline">
+        {{Form::radio('search', 'location', null, ['class' => 'form-check-input'])}}
+        {{Form::label('item', 'Search for a location by name or ID', ['class' => 'form-check-label'])}}
+    </div>
 </div>
 
 <div class="row form-group">
