@@ -250,55 +250,62 @@ class SearchHelper
     {
         // check the area this location belongs to and grab some extra data about it
         $responseData = [];
-        $locationAreaData = $this->guzzleService->callPokeApi('location-area', $areaData[0]->name, false);
-        $responseData['area']['name'] = $locationAreaData->name;
-        if (count($locationAreaData->pokemon_encounters) > 0) {
-            $pokemonEncounterData = [];
-            $i = 0;
-            foreach ($locationAreaData->pokemon_encounters as $pokemonEncounter) {
-                $pokemonEncounterData[$i]['name'] = $pokemonEncounter->pokemon->name;
-                $x = 0;
-                foreach ($pokemonEncounter->version_details as $versionDetail ) {
-                    $pokemonEncounterData[$i]['versions'][$x]['versionName'] = $versionDetail->version->name;
-                    $x++;
+        if (false === is_null($areaData) && count($areaData) > 0) { // if a region was searched for, it wont have an area or belong to a region
+            $locationAreaData = $this->guzzleService->callPokeApi('location-area', $areaData[0]->name, false);
+
+            $responseData['area']['name'] = $locationAreaData->name;
+            if (count($locationAreaData->pokemon_encounters) > 0) {
+                $pokemonEncounterData = [];
+                $i = 0;
+                foreach ($locationAreaData->pokemon_encounters as $pokemonEncounter) {
+                    $pokemonEncounterData[$i]['name'] = $pokemonEncounter->pokemon->name;
+                    $x = 0;
+                    foreach ($pokemonEncounter->version_details as $versionDetail) {
+                        $pokemonEncounterData[$i]['versions'][$x]['versionName'] = $versionDetail->version->name;
+                        $x++;
+                    }
+                    $responseData['pokemonEncounters'] = $pokemonEncounterData;
+                    $i++;
                 }
-                $responseData['pokemonEncounters'] = $pokemonEncounterData;
-                $i++;
             }
         }
 
-        $regionAreaData = $this->guzzleService->callPokeApi('region', $regionData->name, false);
-        $responseData['region']['name'] = $regionData->name;
+        if (false === is_null($regionData) && count($responseData) > 0) {
 
-        // get any pokedexes that have featured this region
-        if (count($regionAreaData->pokedexes) > 0) {
-            $pokedexes = [];
-            $i = 0;
-            foreach ($regionAreaData->pokedexes as $pokedex) {
-                $pokedexes[$i]['name'] = $pokedex->name;
-                $i++;
+            $regionAreaData = $this->guzzleService->callPokeApi('region', $regionData->name, false);
+
+            $responseData['region']['name'] = $regionData->name;
+
+            // get any pokedexes that have featured this region
+            if (count($regionAreaData->pokedexes) > 0) {
+                $pokedexes = [];
+                $i = 0;
+                foreach ($regionAreaData->pokedexes as $pokedex) {
+                    $pokedexes[$i]['name'] = $pokedex->name;
+                    $i++;
+                }
             }
-        }
 
-        // and get any versions of the game that this area appears in - These are formatted like 'red-blue' from the
-        // api, so we'll break those up into their individual parts
-        $versions = [];
-        $x = 0;
-        foreach ($regionAreaData->version_groups as $version) {
-            // check for 2 versions in one response - ignore lets-go
-            if (strstr($version->name, '-') && $version->name !==  "lets-go") {
-                $twoVersions = explode('-', $version->name);
-                $versions[$x]['name'] = $twoVersions[0];
+            // and get any versions of the game that this area appears in - These are formatted like 'red-blue' from the
+            // api, so we'll break those up into their individual parts
+            $versions = [];
+            $x = 0;
+            foreach ($regionAreaData->version_groups as $version) {
+                // check for 2 versions in one response - ignore lets-go
+                if (strstr($version->name, '-') && $version->name !== "lets-go") {
+                    $twoVersions = explode('-', $version->name);
+                    $versions[$x]['name'] = $twoVersions[0];
+                    $x++;
+                    $versions[$x]['name'] = $twoVersions[1];
+                } else {
+                    // standard
+                    $versions[$x]['name'] = $version->name;
+                }
                 $x++;
-                $versions[$x]['name'] = $twoVersions[1];
-            } else {
-                // standard
-                $versions[$x]['name'] = $version->name;
             }
-            $x++;
-        }
 
-        $responseData['region']['versions'] = $versions;
+            $responseData['region']['versions'] = $versions;
+        }
 
         return $responseData;
     }
