@@ -13,6 +13,7 @@
 /var/
 /vendor/
 .idea
+.editorconfig
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PokedexController!{% endblock %}
+
+{% block body %}
+    <div data-controller="search">
+        {{ form_start(form, {
+            attr: {
+                'data-action': 'submit->search#submit',
+            },
+            action: path('app_search'),
+            method: 'POST'
+        }) }}
+        <div class="col-md-8 col-xl-4 text-center mx-auto mt-5">
+            {% for child in form.searchType %}
+                <div class="form-check form-check-inline">
+                    {{ form_widget(child) }}
+                    {{ form_label(child) }}
+                </div>
+            {% endfor %}
+            <div class="col-8 text-center mt-5 mx-auto">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name) }}
+                <div class="row mt-5">
+                    {{ form_widget(form.submit) }}
+                </div>
+            </div>
+        </div>
+        {{ form_end(form) }}
+        <div class="">
+            <div class='col-md-8 col-xl-4 text-center mx-auto mt-5' data-search-target="results"></div>
+        </div>
+    </div>
+{% endblock %}

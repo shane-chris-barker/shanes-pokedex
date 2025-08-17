@@ -16,5 +16,44 @@ services:
     App\:
         resource: '../src/'
 
+    App\Search\Handler\:
+        resource: '../src/Search/Handler/*'
+        tags: [ 'search.strategy' ]
+
+    GuzzleHttp\ClientInterface:
+        class: GuzzleHttp\Client
+        arguments:
+            - { timeout: 5.0, base_uri: 'https://pokeapi.co/api/v2/' }
+
+#    App\Search\Client\PokemonSearchClient:
+#        arguments:
+#            $client: '@app.guzzle.pokemon_client'
+#
+#    App\Search\Client\SpeciesSearchClient:
+#        arguments:
+#            $client: '@app.guzzle.species_client'
+
+    App\Search\Handler\PokemonSearchHandler:
+        arguments:
+            $client: '@App\Search\Client\PokemonSearchClient'
+            $speciesSearchClient: '@App\Search\Client\SpeciesSearchClient'
+            $resultMapper: '@App\Search\Mapper\PokemonResultMapper'
+        tags:
+            - { name: 'search.strategy' }
+
+    App\Search\Handler\ItemSearchHandler:
+        arguments:
+            $client: '@App\Search\Client\ItemSearchClient'
+            $resultMapper: '@App\Search\Mapper\ItemResultMapper'
+        tags:
+            - { name: 'search.strategy' }
+
+    App\Search\Handler\LocationSearchHandler:
+        arguments:
+            $client: '@App\Search\Client\LocationSearchClient'
+            $resultMapper: '@App\Search\Mapper\LocationResultMapper'
+        tags:
+            - { name: 'search.strategy' }
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

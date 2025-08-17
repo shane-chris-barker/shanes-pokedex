@@ -1,0 +1,44 @@
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">{{ data.name | capitalize }}</h5>
+        <p class="card-text">{{ data.description }}</p>
+    </div>
+    <div class="row card-img-top">
+        <img class="col-6" src="{{ data.sprites.frontDefault }}" alt="Card image cap">
+        <img class="col-6" src="{{ data.sprites.backDefault }}" alt="Card image cap">
+        {% for sound in data.pokemonSounds %}
+            <div class="col-12">
+                <div class="text-center">
+                    {{ sound.soundName }}
+                </div>
+            <audio controls>
+                <source src="{{ sound.url }}" type="audio/ogg">
+                Your browser does not support the audio element.
+            </audio>
+            </div>
+        {% endfor %}
+    </div>
+    <span class="border"></span>
+    <div class="card-header">
+        {{ data.name | capitalize }}'s Types
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+            {% for type in data.types %}
+                 ✔️ {{ type.name | capitalize}}
+                <br>
+            {% endfor %}
+        </p>
+    </div>
+    <span class="border"></span>
+    <div class="card-header">
+        Which games can I find {{ data.name | capitalize }} in?
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+            {% for game in data.gameAppearances %}
+                ✔ {{ game.name | capitalize}}
+            {% endfor %}
+        </p>
+    </div>
+</div>
