@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
         {% endblock %}
@@ -12,6 +13,40 @@
         {% endblock %}
     </head>
     <body>
+    <div class="container-fluid" id="intro">
+        <div class="row justify-content-center">
+            <div class="mt-3 col-6 col-sm-6 col-xs-8 text-center">
+                <img alt='logo' src="{{asset('images/logo.png')}}" class="img-fluid"/>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center mt-5">
+                Welcome to Shane's Pokedex!
+            </h2>
+            <p class="text-center">
+                A fun little PHP and Symfony based Pokedex.
+                <br>
+                Consumes the API kindly created and provided by <a href="https://pokeapi.co/" target="_blank">PokeApi</a>
+            </p>
+        </div>
         {% block body %}{% endblock %}
+    </div>
     </body>
+    <footer>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-6 col-sm-6 col-xs-8 text-center mt-3">
+                    <img alt='logo' src="{{asset('images/logo.png')}}" class="img-fluid"/>
+                </div>
+            </div>
+            <div class="text-center pb-4">
+                <p>
+                    This application is in no way endorsed or associated with Niantic, Nintendo or any other official
+                    Pokemon entity and I do not own any copyright related to Pokemon.
+                </p>
+            </div>
+        </div>
+    </footer>
 </html>

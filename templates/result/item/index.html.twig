@@ -1,0 +1,14 @@
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">{{ data.name | capitalize }}</h5>
+
+    </div>
+    <div class="row card-img-top">
+        <img class="col-2 mx-auto" src="{{ data.sprites.default }}" alt="{{ data.name | capitalize }} sprite">
+    </div>
+    <div class="row">
+        <p class="card-text">
+            <b>Item Category:</b> {{ data.category | capitalize}}</p>
+        <p class="card-text">{{ data.description }}</p>
+    </div>
+</div>
