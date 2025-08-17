@@ -1,21 +1,34 @@
-# Shane's Pokedex
-Shane's Pokedex is a fun little Laravel application that uses the [PokeApi](https://pokeapi.co) to search for data and return results.
+# Shane's Pokedex 
 
-The application currently allows for the searching of any Pokemon, attack or item by name or ID.
+Shane's Pokedex is a fun little application that allows you to search for information related to Pokemon,
+Items and locations from within the Pokemon universe.
+
+It's a fan project and is in no way affiliated or endorsed by or Niantic, Nintendo or any other official Pokemon entity and I do not own any copyright related to Pokemon.
+
+The app is written in PHP and uses the Symfony framework.
+
+## What can it do?
+
+Right now, the app will let you search for any Pokemon, Item or Location from within the Pokemon Universe.
+
+I plan to add more features in the future.
+
+The app was originally written in Laravel and had a few more features -  I am working to restore the features removed during the Symfony 7 rewrite.
 
 # Requirements
-- PHP 7.1.3 or greater.
-- Laravel 5.7 or greater.
 
-# Installation
+The application runs as a Symfony 7 app requiring PHP 8.3 or greater.
 
-Installation is carried out via Composer. Simply clone the repository and run ```composer install```
+Simply install Docker and run 
+`docker compose up -d`
 
-# Caching
-Be nice to the PokeApi, speed up the application and save on bandwidth by enabling Redis.
-Caching is disabled by default but can easily be enabled:
-- Ensure that Redis is installed and configured on your server.
-- Ensure the settings in ```config/database.php``` match to your required Redis configuration.
-- Ensure the setting in the ```.env``` file is set to ```CACHE_WITH_REDIS=true```
+# Tests
+Tests can be carried out with `PhpUnit` - Simply run `php bin/phpunit`
 
-# Have fun!
+Test coverage and Github actions will be added in the near future.
+
+
+# With Thanks
+
+Thank you to the creators and maintainers over at [https://pokeapi.co/](https://pokeapi.co/) for providing the REST Api needed for the app to work.
+

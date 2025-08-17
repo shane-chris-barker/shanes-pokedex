@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">{{ data.friendlyName }}</h5>
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+            Located within the <b>{{ data.region | capitalize }}</b> region
+        </p>
+    </div>
+    <span class="border"></span>
+    <div class="card-header">
+        Areas within {{ data.friendlyName }}
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+            {% for area in data.areas %}
+                ✔️ {{ area.friendlyName}}
+                <br>
+            {% endfor %}
+        </p>
+    </div>
+</div>

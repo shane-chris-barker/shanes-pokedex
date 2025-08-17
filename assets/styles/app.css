@@ -1,0 +1,11 @@
+body {
+    background-color: skyblue;
+}
+footer {
+    background-color:#00A9ED;
+}
+
+#intro {
+    background-color:#00A9ED;
+    min-height:9em;
+}

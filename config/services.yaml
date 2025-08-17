@@ -1,0 +1,59 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+
+    App\Search\Handler\:
+        resource: '../src/Search/Handler/*'
+        tags: [ 'search.strategy' ]
+
+    GuzzleHttp\ClientInterface:
+        class: GuzzleHttp\Client
+        arguments:
+            - { timeout: 5.0, base_uri: 'https://pokeapi.co/api/v2/' }
+
+#    App\Search\Client\PokemonSearchClient:
+#        arguments:
+#            $client: '@app.guzzle.pokemon_client'
+#
+#    App\Search\Client\SpeciesSearchClient:
+#        arguments:
+#            $client: '@app.guzzle.species_client'
+
+    App\Search\Handler\PokemonSearchHandler:
+        arguments:
+            $client: '@App\Search\Client\PokemonSearchClient'
+            $speciesSearchClient: '@App\Search\Client\SpeciesSearchClient'
+            $resultMapper: '@App\Search\Mapper\PokemonResultMapper'
+        tags:
+            - { name: 'search.strategy' }
+
+    App\Search\Handler\ItemSearchHandler:
+        arguments:
+            $client: '@App\Search\Client\ItemSearchClient'
+            $resultMapper: '@App\Search\Mapper\ItemResultMapper'
+        tags:
+            - { name: 'search.strategy' }
+
+    App\Search\Handler\LocationSearchHandler:
+        arguments:
+            $client: '@App\Search\Client\LocationSearchClient'
+            $resultMapper: '@App\Search\Mapper\LocationResultMapper'
+        tags:
+            - { name: 'search.strategy' }
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
